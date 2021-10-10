@@ -6,15 +6,14 @@ padding: 0;
 box-sizing: border-box;
 }
 :root{
-    --clr-bg: hsl(0, 29%, 61%);
+    --clr-bg: hsl(0, 33%, 99%);
     --clr-white: hsl(0, 0%, 98%);
     --clr-blue: hsl(240, 90%, 41%);
     --clr-black: hsl(0, 0%, 3%);
 }
 body{
 background-color: var(--clr-bg);
-font-family: 'Poppins',
-sans-serif;
+font-family: 'Poppins',sans-serif;
 }
 .container{
 max-width: 1200px;
@@ -28,10 +27,151 @@ grid-template-rows: repeat(4, 12rem);
 grid-gap: 0.5rem;
 }
 
+/*=======CARD-ITEMS=======*/
+.card__item-1{
+ grid-column: 1 / span 1;
+ grid-row: 1 / span 1;
+}
+.card__item-2 {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+}
+.card__item-3 {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+}
+.card__item-4 {
+    grid-column: 3 / span 1;
+    grid-row: 1 / span 3;
+}
+.card__item-5 {
+    grid-column: 1 / span 2;
+    grid-row: 3 / span 2;
+}
+.card__item-6 {
+    grid-column: 3 / span 1;
+    grid-row: 4 / span 1;
+}
+
+/*=======CARD-Link=======*/
+.card__link{
+display: block;
+position: relative;
+width: 100%;
+height: 100%;
+overflow: hidden;
+}
+/*=======CARD-OVERLAY=======*/
+.card__overlay{
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background: rgba(0, 0, 0, 0.5);
+color: var(--clr-white);
+font-size: 1.25rem;
+font-weight: 800;
+text-transform: capitalize;
+opacity: 0;
+pointer-events: none;
+transition: opacity .2s;
+
+}
+.card__link:hover .card__overlay{
+opacity: 1;
+}
+/*=======CARD-OVERLAY-TEXT=======*/
+.card__overlay span{
+position: relative;
+line-height: 2rem;
+}
+.card__overlay span::before, 
+.card__overlay span::after{
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 0;
+    background-color: var(--clr-white);
+    transition: width .3s ease-in-out .2s;
+}
+.card__overlay span::before{
+  top: 0;
+  left: 0;
+}
+.card__overlay span::after{
+  bottom: 0;
+  right: 0;
+}
+
+.card__link:hover .card__overlay span::before,
+.card__link:hover .card__overlay span::after{
+  width: 100%;
+}
 
 /*=======CARD-IMAGE=======*/
 .card__img{
 width: 100%;
 height: 100%;
 object-fit: cover;
+ transform: scale(1.05);
+transition: transform .5s, filter .5s;
+}
+.card__link:hover .card__img{
+ transform: scale(1, 2);
+ filter: blur(2px);
+}
+
+/*=======MEDIA QUERY=======*/
+@media screen and (max-width:60rem){
+    .container{
+    padding: 1rem;
+    }
+    .card{
+    grid-template-columns: repeat(2, 1fr);
+    }
+    /*=======CARD-ITEMS=======*/
+    .card__item-1 {
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+    }
+    .card__item-2 {
+        grid-column: 1 / span 1;
+        grid-row: 2 / span 1;
+    }
+    .card__item-3 {
+        grid-column: 2 / span 1;
+        grid-row: 1 / span 2;
+    }
+    .card__item-4 {
+        grid-column: 1 / span 1;
+        grid-row: 3 / span 2;
+    }
+    .card__item-5 {
+        grid-column: 2 / span 1;
+        grid-row: 3 / span 1;
+    }
+    .card__item-6 {
+        grid-column: 2 / span 1;
+        grid-row: 4 / span 1;
+    }
+    .card__overlay{
+       font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 37.5rem){
+    .card{
+    display: block;
+    }
+    .card__item{
+    margin: 0.5rem;
+    }
+    .card__link{
+    height: 80vh;
+    }
 }
